@@ -27,7 +27,7 @@ import (
 	"gorm.io/driver/postgres"
 
 	//"gorm.io/driver/sqlite"
-	"gorm.io/driver/sqlserver"
+	//"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/plugin/dbresolver"
@@ -269,11 +269,13 @@ func openDBConnection(driverName, dataSourceName string) (*gorm.DB, error) {
 		db, err = gorm.Open(postgres.Open(dataSourceName), &gorm.Config{})
 	} else if driverName == "mysql" {
 		db, err = gorm.Open(mysql.Open(dataSourceName), &gorm.Config{})
-	} else if driverName == "sqlserver" {
-		db, err = gorm.Open(sqlserver.Open(dataSourceName), &gorm.Config{})
-		//} else if driverName == "sqlite3" {
-		//	db, err = gorm.Open(sqlite.Open(dataSourceName), &gorm.Config{})
-	} else {
+	} 
+// 		else if driverName == "sqlserver" {
+// 		db, err = gorm.Open(sqlserver.Open(dataSourceName), &gorm.Config{})
+// 		//} else if driverName == "sqlite3" {
+// 		//	db, err = gorm.Open(sqlite.Open(dataSourceName), &gorm.Config{})
+// 	}
+	else {
 		return nil, errors.New("Database dialect '" + driverName + "' is not supported. Supported databases are postgres, mysql and sqlserver")
 	}
 	if err != nil {
